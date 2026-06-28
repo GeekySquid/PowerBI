@@ -15,6 +15,13 @@
 </div>
 
 ---
+# 📸 Dashboard Preview
+
+<p align="center">
+<img src="Dashboard.png" width="90%">
+</p>
+---
+---
 
 # 📖 About The Project
 
@@ -124,22 +131,69 @@ Using **Model View**, I
 
 ---
 
-# 📐 DAX Learning
+## 📐 DAX (Data Analysis Expressions)
 
-This project introduced me to **DAX (Data Analysis Expressions)**.
+One of the key learnings in this project was creating calculated columns using **DAX** to clean and transform the data.
 
-### Calculated Column
+### 🔹 1. Handling Missing Score Values
+
+To replace blank values in the **Score** column, I created the following calculated column:
 
 ```DAX
 Clean Score = COALESCE(customers[score], 0)
 ```
 
-### What I Learned
+### 💡 Explanation
 
-- Calculated Columns
+- Returns the original **Score** if it exists.
+- Replaces blank (`NULL`) values with **0**.
+- Ensures accurate calculations and consistent visualizations.
+
+---
+
+### 🔹 2. Converting Text to Date Format
+
+The **order_date** column was stored as **Text**, so I converted it into a proper **Date** data type using the following DAX formula:
+
+```DAX
+OrderDate =
+DATE(
+    VALUE(RIGHT([order_date],4)),
+    VALUE(MID([order_date],4,2)),
+    VALUE(LEFT([order_date],2))
+)
+```
+
+### 💡 Explanation
+
+This formula extracts the individual parts of the text date and reconstructs them as a valid **Date**.
+
+For example:
+
+| Original Text | Converted Date |
+|--------------|----------------|
+| `15/07/2024` | `15-Jul-2024` |
+| `01/12/2023` | `01-Dec-2023` |
+
+#### How it works
+
+- `RIGHT([order_date],4)` → Extracts the **Year**
+- `MID([order_date],4,2)` → Extracts the **Month**
+- `LEFT([order_date],2)` → Extracts the **Day**
+- `DATE()` → Combines Day, Month, and Year into a valid **Date** value recognized by Power BI.
+
+---
+
+### ✔ DAX Skills Learned
+
+- Creating Calculated Columns
+- Using `COALESCE()`
 - Handling Missing Values
-- COALESCE()
-- Basic DAX Syntax
+- Converting Text to Date
+- Using `DATE()`
+- Using `LEFT()`, `MID()`, and `RIGHT()`
+- Data Transformation
+- Preparing Data for Time-Based Analysis
 
 ---
 
@@ -202,16 +256,6 @@ PowerBI-Customer-Dashboard
 ├── Dashboard.png
 └── README.md
 ```
-
----
-
-# 📸 Dashboard Preview
-
-> Add your dashboard screenshot below.
-
-<p align="center">
-<img src="Dashboard.png" width="90%">
-</p>
 
 ---
 
