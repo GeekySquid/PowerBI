@@ -20,8 +20,6 @@
 <p align="center">
 <img src="Dashboard.png" width="90%">
 </p>
----
----
 
 # 📖 About The Project
 
